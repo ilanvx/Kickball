@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kickball - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background with gradient and graphic elements -->
+    <div class="background-container">
+        <video class="gradient-bg" autoplay muted loop playsinline>
+            <source src="images/background.mp4" type="video/mp4">
+        </video>
+        <div class="graphic-lines">
+            <div class="line line-1"></div>
+            <div class="line line-2"></div>
+            <div class="line line-3"></div>
+            <div class="line line-4"></div>
+        </div>
+    </div>
+
+    <!-- Left Sidebar Menu -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-futbol"></i>
+            </div>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-item active">
+                <div class="menu-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span class="menu-text">Home</span>
+                <div class="active-indicator"></div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <span class="menu-text">Gifts</span>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="menu-text">Events</span>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <span class="menu-text">Rewards</span>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="menu-text">Profile</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="content-wrapper">
+            <!-- Main Content - Centered -->
+            <div class="main-content-centered">
+                <!-- Header Content -->
+                <div class="header-content">
+                    <div class="main-logo">
+                        <i class="fas fa-futbol"></i>
+                        <span>Kickball</span>
+                    </div>
+                </div>
+
+                <!-- Welcome and Login Section -->
+                <div class="login-section">
+                    <h2 class="welcome-title">Welcome Back</h2>
+                    
+                    <!-- Login Form -->
+                    <form class="login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="login-submit-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Sign In</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Divider -->
+                    <div class="form-divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <!-- Google Login -->
+                    <button class="google-login-btn">
+                        <i class="fab fa-google"></i>
+                        <span>Sign in with Google</span>
+                    </button>
+                    
+                    <!-- Registration Link -->
+                    <div class="registration-section">
+                        <p>Don't have an account? <a href="#" class="register-link">Sign up now</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
