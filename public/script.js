@@ -7,9 +7,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize website functionality
 function initializeWebsite() {
+    loadSidebar();
     setupSidebarNavigation();
-    setupLoginForm();
+    setupModalFunctionality();
     console.log('Kickball Home website initialized successfully!');
+}
+
+// Load sidebar from external file
+function loadSidebar() {
+    const sidebarContainer = document.getElementById('sidebar-container');
+    if (sidebarContainer) {
+        fetch('sidebar.html')
+            .then(response => response.text())
+            .then(html => {
+                sidebarContainer.innerHTML = html;
+                markActiveMenuItem();
+            })
+            .catch(error => {
+                console.error('Error loading sidebar:', error);
+            });
+    }
+}
+
+// Mark active menu item based on current page
+function markActiveMenuItem() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    menuItems.forEach(item => {
+        item.classList.remove('active');
+        const link = item.querySelector('a');
+        if (link) {
+            const href = link.getAttribute('href');
+            if (href === currentPage || (currentPage === 'index.html' && href === 'index.html')) {
+                item.classList.add('active');
+                // Add active indicator if it's the active item
+                if (!item.querySelector('.active-indicator')) {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'active-indicator';
+                    item.appendChild(indicator);
+                }
+            }
+        }
+    });
 }
 
 // Sidebar navigation functionality
@@ -326,16 +366,92 @@ function setupBlogImage() {
     }
 }
 
-// Login form functionality
-function setupLoginForm() {
+// Modal functionality
+function setupModalFunctionality() {
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('auth-modal') || event.target.classList.contains('form-modal')) {
+            closeAllModals();
+        }
+    });
+    
+    // Setup form submissions
+    setupFormSubmissions();
+}
+
+// Open authentication options modal
+function openAuthOptions() {
+    const modal = document.getElementById('authModal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close authentication options modal
+function closeAuthModal() {
+    const modal = document.getElementById('authModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Open login form modal
+function openLoginForm() {
+    closeAuthModal();
+    const modal = document.getElementById('loginModal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close login form modal
+function closeLoginModal() {
+    const modal = document.getElementById('loginModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Open register form modal
+function openRegisterForm() {
+    closeAuthModal();
+    const modal = document.getElementById('registerModal');
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close register form modal
+function closeRegisterModal() {
+    const modal = document.getElementById('registerModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+
+
+// Close all modals
+function closeAllModals() {
+    const modals = document.querySelectorAll('.auth-modal, .form-modal');
+    modals.forEach(modal => {
+        modal.style.display = 'none';
+    });
+    document.body.style.overflow = 'auto';
+}
+
+// Setup form submissions
+function setupFormSubmissions() {
     const loginForm = document.querySelector('.login-form');
+    const registerForm = document.querySelector('.register-form');
     const googleLoginBtn = document.querySelector('.google-login-btn');
-    const registerLink = document.querySelector('.register-link');
+    const googleRegisterBtn = document.querySelector('.google-register-btn');
     
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             handleLoginFormSubmission();
+        });
+    }
+    
+    if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleRegisterFormSubmission();
         });
     }
     
@@ -345,10 +461,9 @@ function setupLoginForm() {
         });
     }
     
-    if (registerLink) {
-        registerLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            handleRegisterClick();
+    if (googleRegisterBtn) {
+        googleRegisterBtn.addEventListener('click', function() {
+            handleGoogleRegister();
         });
     }
 }
@@ -374,6 +489,33 @@ function handleLoginFormSubmission() {
     // Simulate login process
     setTimeout(() => {
         showSuccessMessage('Successfully signed in!');
+        closeLoginModal();
+    }, 2000);
+}
+
+// Handle register form submission
+function handleRegisterFormSubmission() {
+    const username = document.getElementById('reg-username').value;
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    const confirmPassword = document.getElementById('reg-confirm-password').value;
+    
+    console.log('Register form submitted:', { username, email, password, confirmPassword });
+    
+    // Add submit animation
+    const submitBtn = document.querySelector('.register-submit-btn');
+    submitBtn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        submitBtn.style.transform = '';
+    }, 200);
+    
+    // Show success message
+    showSuccessMessage('Creating account...');
+    
+    // Simulate registration process
+    setTimeout(() => {
+        showSuccessMessage('Account created successfully!');
+        closeRegisterModal();
     }, 2000);
 }
 
@@ -394,18 +536,27 @@ function handleGoogleLogin() {
     // Simulate Google login process
     setTimeout(() => {
         showSuccessMessage('Successfully signed in with Google!');
+        closeLoginModal();
     }, 2500);
 }
 
-// Handle register link click
-function handleRegisterClick() {
-    console.log('Register link clicked!');
+// Handle Google register
+function handleGoogleRegister() {
+    console.log('Google register clicked!');
+    
+    // Add click animation
+    const button = document.querySelector('.google-register-btn');
+    button.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        button.style.transform = '';
+    }, 200);
     
     // Show info message
-    showInfoMessage('Redirecting to sign up page...');
+    showInfoMessage('Redirecting to Google sign up...');
     
-    // Simulate navigation delay
+    // Simulate Google registration process
     setTimeout(() => {
-        showSuccessMessage('Sign up page opened!');
-    }, 1500);
+        showSuccessMessage('Successfully signed up with Google!');
+        closeRegisterModal();
+    }, 2500);
 }

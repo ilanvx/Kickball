@@ -25,51 +25,7 @@
     </div>
 
     <!-- Left Sidebar Menu -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <i class="fas fa-futbol"></i>
-            </div>
-        </div>
-        
-        <div class="sidebar-menu">
-            <div class="menu-item active">
-                <div class="menu-icon">
-                    <i class="fas fa-home"></i>
-                </div>
-                <span class="menu-text">Home</span>
-                <div class="active-indicator"></div>
-            </div>
-            
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <i class="fas fa-gift"></i>
-                </div>
-                <span class="menu-text">Gifts</span>
-            </div>
-            
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <i class="fas fa-star"></i>
-                </div>
-                <span class="menu-text">Events</span>
-            </div>
-            
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <span class="menu-text">Rewards</span>
-            </div>
-            
-            <div class="menu-item">
-                <div class="menu-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <span class="menu-text">Profile</span>
-            </div>
-        </div>
-    </div>
+    <div id="sidebar-container"></div>
 
     <!-- Main Content Area -->
     <div class="main-content">
@@ -84,52 +40,141 @@
                     </div>
                 </div>
 
-                <!-- Welcome and Login Section -->
-                <div class="login-section">
-                    <h2 class="welcome-title">Welcome Back</h2>
-                    
-                    <!-- Login Form -->
-                    <form class="login-form">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                        </div>
-                        
-                        <div class="form-options">
-                            <label class="remember-me">
-                                <input type="checkbox" name="remember">
-                                <span>Remember me</span>
-                            </label>
-                            <a href="#" class="forgot-password">Forgot password?</a>
-                        </div>
-                        
-                        <button type="submit" class="login-submit-btn">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span>Sign In</span>
-                        </button>
-                    </form>
-                    
-                    <!-- Divider -->
-                    <div class="form-divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <!-- Google Login -->
-                    <button class="google-login-btn">
-                        <i class="fab fa-google"></i>
-                        <span>Sign in with Google</span>
+                <!-- Welcome and Game Info Section -->
+                <div class="welcome-section">
+                    <h2 class="game-title">Kickball</h2>
+                    <p class="game-description">
+                        Kickball is a physics-based multiplayer soccer game<br>
+                        where teamwork and strategy are essential.
+                    </p>
+                    <button class="play-now-btn" onclick="openAuthOptions()">
+                        Play Now!
                     </button>
-                    
-                    <!-- Registration Link -->
-                    <div class="registration-section">
-                        <p>Don't have an account? <a href="#" class="register-link">Sign up now</a></p>
+                </div>
+
+
+
+                <!-- Authentication Options Modal -->
+                <div class="auth-modal" id="authModal">
+                    <div class="auth-modal-content">
+                        <div class="auth-modal-header">
+                            <h3>Choose Your Option</h3>
+                            <button class="close-modal-btn" onclick="closeAuthModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="auth-options">
+                            <button class="auth-option-btn login-option" onclick="openLoginForm()">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Sign In</span>
+                                <small>Already have an account?</small>
+                            </button>
+                            
+                            <button class="auth-option-btn register-option" onclick="openRegisterForm()">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Sign Up</span>
+                                <small>Create a new account</small>
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Login Form Modal -->
+                <div class="form-modal" id="loginModal">
+                    <div class="form-modal-content">
+                        <div class="form-modal-header">
+                            <h3>Welcome Back</h3>
+                            <button class="close-modal-btn" onclick="closeLoginModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <form class="login-form">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                            
+                            <div class="form-options">
+                                <label class="remember-me">
+                                    <input type="checkbox" name="remember">
+                                    <span>Remember me</span>
+                                </label>
+                                <a href="#" class="forgot-password">Forgot password?</a>
+                            </div>
+                            
+                            <button type="submit" class="login-submit-btn">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Sign In</span>
+                            </button>
+                        </form>
+                        
+                        <div class="form-divider">
+                            <span>or</span>
+                        </div>
+                        
+                        <button class="google-login-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Sign in with Google</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Register Form Modal -->
+                <div class="form-modal" id="registerModal">
+                    <div class="form-modal-content">
+                        <div class="form-modal-header">
+                            <h3>Create Account</h3>
+                            <button class="close-modal-btn" onclick="closeRegisterModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <form class="register-form">
+                            <div class="form-group">
+                                <label for="reg-username">Username</label>
+                                <input type="text" id="reg-username" name="username" placeholder="Choose a username" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reg-email">Email</label>
+                                <input type="email" id="reg-email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reg-password">Password</label>
+                                <input type="password" id="reg-password" name="password" placeholder="Create a password" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reg-confirm-password">Confirm Password</label>
+                                <input type="password" id="reg-confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                            </div>
+                            
+                            <button type="submit" class="register-submit-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Create Account</span>
+                            </button>
+                        </form>
+                        
+                        <div class="form-divider">
+                            <span>or</span>
+                        </div>
+                        
+                        <button class="google-register-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Sign up with Google</span>
+                        </button>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
